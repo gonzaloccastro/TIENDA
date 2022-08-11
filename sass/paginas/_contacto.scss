@@ -1,0 +1,39 @@
+/* Página Contacto */
+
+.gridBodyContacto {
+    @include gridsBodys(contenidoBodyContacto);
+}
+
+.fondoGaleria {
+    background: $imagenFondo;
+    padding: 5%;
+}
+
+.contenidoBodyContacto {
+    grid-area: contenidoBodyContacto;
+}
+
+.espacioFotoContacto {
+    display: flex;
+    justify-content: center;
+}
+
+.fotoContacto {
+    padding: 2rem;
+    width: 100%;
+}
+
+.formularioContacto {
+    padding: 28px;
+}
+
+.contenidoBodyContacto{
+    @extend .animacionIn;
+}
+
+.formu {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,0 +1,57 @@
+/* Página Agenda */
+
+.gridBodyAgenda {
+    @include gridsBodys(contenidoBodyAgenda);
+}
+
+.contenidoBodyAgenda {
+    grid-area: contenidoBodyAgenda;
+    padding-bottom: 1rem;
+    background: $imagenFondo;
+    @extend .animacionIn;
+}
+
+.tituloAgenda {
+    padding: 50px;
+}
+
+.imgAgenda {
+    height: 300px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    &:hover .overlay {
+        opacity: 1;
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: $color-oscuro;
+}
+
+.text {
+    color: $color-claro;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.gridAgenda {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+}

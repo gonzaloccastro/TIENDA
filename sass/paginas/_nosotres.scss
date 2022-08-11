@@ -1,0 +1,54 @@
+
+/* Página Nosotres */
+
+.gridBodyNosotres {
+    @include gridsBodys(contenidoBodyNosotres);
+}
+
+.contenidoBodyNosotres {
+    grid-area: contenidoBodyNosotres;
+    background: $imagenFondo;
+}
+
+.gridNosotres {
+    display: grid;
+    grid-template-rows: 8% auto auto;
+    grid-template-areas: 'titulo' 'texto' 'imagen';
+    grid-gap: 5px;
+    justify-items: center;
+    @extend .animacionIn;
+}
+
+.cajatituloNosotres {
+    @extend .flexCentrado;
+    grid-area: titulo;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.tituloNosotres {
+    @extend .flexCentrado;
+
+}
+
+.textoDescripcion {
+    grid-area: texto;
+    @extend .flexCentrado;
+    justify-content: center;
+    height: auto;
+    max-width: 600px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    margin: 1rem;
+}
+
+.imagenNosotres {
+    @extend .flexCentrado;
+    grid-area: imagen;
+    justify-items: center;
+    height: auto;
+    width: 100%;
+    padding: 40px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

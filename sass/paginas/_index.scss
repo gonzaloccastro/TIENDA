@@ -1,0 +1,31 @@
+/* Página Index */
+
+.gridBodyInicio {
+    @include gridsBodys(contenidoBody);
+}
+
+.tituloWeb {
+    grid-area: tituloWeb;
+}
+
+.barraMenu {
+    grid-area: barraMenu;
+}
+
+.contenidoBody {
+    grid-area: contenidoBody;
+    display: flex;
+    justify-content: center;
+    background: $imagenFondo;
+}
+
+.logo {
+    padding: 40px;
+    height: 300px;
+    margin-top: 90%;
+    margin-bottom: 90%;
+}
+
+.barraFooter {
+    grid-area: barraFooter;
+}

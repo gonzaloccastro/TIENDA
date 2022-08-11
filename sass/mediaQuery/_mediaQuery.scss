@@ -1,0 +1,135 @@
+/* Media Queries */
+
+@media screen and (max-width: 1920px) {}
+
+@media screen and (max-width: 730px) {}
+
+@media screen and (max-width: 460px) {
+    /* Título */
+    h1 {
+        display: none;
+    }
+
+    /* Página Index */
+    .gridBodyInicio {
+        @include gridsBodys(contenidoBody);
+    }
+    .barraMenu {
+        grid-area: barraMenu;
+    }
+    .gridHeader {
+        background-color: $color-oscuro;
+        display: grid;
+        grid-template-areas: "logoHeader menuHeader";
+        grid-template-columns: 25% 75%;
+    }
+    .menuHeader {
+        grid-area: menuHeader;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-right: 20px;
+        flex-wrap: wrap;
+    }
+    .contenidoBody {
+        grid-area: contenidoBody;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 150px;
+        padding-top: 150px;
+    }
+    .logo {
+        padding: 00px;
+        margin: 70px;
+        height: 120px;
+    }
+    .barraFooter {
+        grid-area: barraFooter;
+    }
+    
+    //* Página Agenda */
+    .gridBodyAgenda {
+        @include gridsBodys(contenidoBodyAgenda);
+    }
+    .gridAgenda {
+        display: grid;
+        grid-template-columns: auto;
+    }
+    .imgAgenda {
+        height: 200px;
+    }
+    .contenidoBodyAgenda {
+        grid-area: contenidoBodyAgenda;
+        padding-top: 20px;
+    }
+
+    /* Página Galeria */
+    .gridBodyGaleria {
+        @include gridsBodys(contenidoBodyGaleria);
+    }
+    .grid-layout {
+        padding-bottom: 40px;
+        display: grid;
+        grid-template-areas: "auto";
+        grid-template-columns: 100%;
+    }
+    .contenidoBodyGaleria {
+        padding-top: 50px;
+    }
+    .fotosGaleria {
+        height: 150px;
+    }
+    
+    /* Página Nosotres */
+    .gridBodyNosotres {
+        @include gridsBodys(contenidoBodyNosotres);
+    }
+    .gridNosotres {
+        display: grid;
+        grid-template-rows: 8% auto auto;
+        grid-template-areas: 'titulo' 'texto' 'imagen';
+        grid-template-columns: 100%;
+        grid-gap: 0px;
+        justify-items: center;
+        padding-top: 2rem;
+        padding-bottom: 40px;
+    }
+    .textoDescripcion {
+        grid-area: texto;
+        @extend .flexCentrado;
+        height: auto;
+        width: 100%;
+        padding: 30px;
+    }
+    .imagenNosotres {
+        grid-area: imagen;
+        @extend .flexCentrado;
+        justify-items: center;
+        width: 100%;
+    }
+
+    /* Página Contacto */
+    .gridBodyContacto {
+        @include gridsBodys(contenidoBodyContacto);
+    }
+    .fotoContacto {
+        padding: 2rem;
+        width: 100%;
+    }
+    .tituloGaleria {
+        padding-top: 3rem;
+    }
+    .formularioContacto {
+        margin: 10px;
+        padding: 18px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+    .formu {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}

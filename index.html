@@ -1,14 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- TAGS REQUERIDOS -->
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esta es la despensa del Árbol</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Título y Favicon -->
+    <title>La Casa del Árbol - Centro Cultural</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
 </head>
 <body>
-    
+    <div class="gridBodyInicio">
+        <!-- Header -->
+        <header>
+            <div>
+                <div class="tituloWeb">
+                    <h1>MODO ADMINISTRADOR</h1>
+                </div>
 
-    <script src="app.js"></script>
+                <!-- Nav con Bootstrap -->
+
+                <div class="barraMenu">
+                    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(38, 37, 37);">
+                        <div class="container-fluid">
+                            <a class="navbar-brand" href="index.html">
+                            <img src="media/index/logo-header.png" alt="logo-header" class="logoHeaderStyle">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page"  href="pages/tienda.html">Tienda</a>
+                                </li> -->
+                                <!-- <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pages/agenda.html">Agenda</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pages/galeria.html">Galería</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pages/nosotres.html">Nosotres</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="pages/contacto.html">Contacto</a>
+                                </li> -->
+                            </ul>
+                            <!-- <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                                <button class="btn btn-light" type="submit">Buscar
+                                </button>
+                            </form> -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+        </header>
+    </div>
+
+    <!-- Section -->
+    <section>
+        <div class="contenidoBody">
+            <a href="index.html"><img src="media/logo-arbol.png" alt="logo-arbol" class="logo animacionIn"></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    
+        <div class="gridFooter">
+
+            <!-- Logos y Dirección -->
+            <div class="footerDireccion">
+                <a target="_blank" href="https://g.page/lacasadelarbolcc?share">
+                    <h6>Dirección - Av Córdoba 5217</h6>
+                </a>
+            </div>
+            <div class="footerLogos">
+                <div>
+                    <div class="footerInstagram">
+                        <a target="_blank" href="https://www.instagram.com/_lacasadelarbol_/"><img src="media/index/ig-logo.png" alt="foto" class="logoIg"></a>
+                    </div>
+                    <div class="footerYoutube">
+                        <a target="_blank" href="https://www.youtube.com/channel/UCHJCUR9qUKdXYBjcB2bl7Xg"><img src="media/index/yt-logo.png" alt="foto" class="logoYt"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootrstap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <script src="script.js"></script>
+    </footer>
+
 </body>
 </html>

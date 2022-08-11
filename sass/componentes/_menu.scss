@@ -1,0 +1,40 @@
+/* Menú Superior */
+
+.gridHeader {
+    background-color: $color-oscuro;
+    display: grid;
+    grid-template-areas: "logoHeader menuHeader";
+    grid-template-columns: 25% 75%;
+}
+
+.menuInicio {
+    padding: 15px;
+}
+
+.logoHeader {
+    grid-area: logoHeader;
+    @extend .displayFlex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.menuHeader {
+    grid-area: menuHeader;
+    @extend .displayFlex;
+    justify-content: space-around;
+    align-items: center;
+    padding-right: 0px;
+    flex-wrap: wrap;
+}
+
+.logoHeaderStyle {
+    width: 40px;
+    margin-left: 10px;
+    display: flex;
+    align-content: center;
+}
+
+.bg-dark{
+    background-color: $color-oscuro;
+}

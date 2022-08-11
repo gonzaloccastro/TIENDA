@@ -1,0 +1,38 @@
+/* Página Galería */
+
+.gridBodyGaleria {
+    @include gridsBodys(contenidoBodyGaleria);
+}
+
+.contenidoBodyGaleria {
+    grid-area: contenidoBodyGaleria;
+    background: $imagenFondo;
+    padding: 3.5%;
+    @extend .animacionIn;
+}
+
+.fotosGaleria {
+    height: 270px;
+    animation-name: galeria;
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.tituloGaleria {
+    padding: 10px;
+}
+
+.grid-layout {
+    padding: 20px;
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-areas: "auto auto";
+    grid-template-columns: 50% 50%;
+}
+
+.caja {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}

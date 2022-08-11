@@ -1,0 +1,43 @@
+/* Footer General */
+
+.gridFooter {
+    background-color: $color-oscuro;
+    padding: 15px;
+    display: grid;
+    grid-template-areas: "direccion logos";
+    grid-template-columns: auto auto;
+}
+
+.logoIg {
+    height: 22px;
+}
+
+.logoYt {
+    height: 24px;
+}
+
+.footerDireccion {
+    grid-area: direccion;
+    @extend .displayFlex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+}
+
+h6 {
+    font-size: 90%;
+}
+
+a {
+    color: $color-claro;
+    text-decoration: none;
+}
+
+.footerLogos {
+    @extend .displayFlex;
+    grid-area: logos;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+

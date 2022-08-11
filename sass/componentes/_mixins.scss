@@ -1,0 +1,8 @@
+/* Mixins */
+
+@mixin gridsBodys($body) {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+}

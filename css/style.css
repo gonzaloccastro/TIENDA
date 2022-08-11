@@ -1,0 +1,490 @@
+@charset "UTF-8";
+/* Partials */
+@font-face {
+  font-family: gt-walsheim;
+  src: url("../media/fonts/GT-Walsheim-Pro-Regular.ttf");
+}
+/* Desformateador */
+* {
+  font-family: "gt-walsheim", regular;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+/* Extend Flex */
+.displayFlex, .footerLogos, .footerDireccion, .menuHeader, .logoHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexCentrado, .imagenNosotres, .textoDescripcion, .tituloNosotres, .cajatituloNosotres, h1 {
+  display: flex;
+  align-items: center;
+}
+
+.animacionIn, .contenidoBodyContacto, .contenidoBodyGaleria, .gridNosotres, .contenidoBodyAgenda {
+  animation-name: animacionIn;
+  animation-duration: 3s;
+}
+
+@keyframes animacionIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 2;
+  }
+}
+/* Barra Título */
+h1 {
+  color: rgb(38, 37, 37);
+  font-size: 15px;
+  margin-top: 0.5rem;
+  padding: 5px;
+  background-color: rgb(252, 252, 252);
+  justify-content: center;
+}
+
+/* Menú Superior */
+.gridHeader {
+  background-color: rgb(38, 37, 37);
+  display: grid;
+  grid-template-areas: "logoHeader menuHeader";
+  grid-template-columns: 25% 75%;
+}
+
+.menuInicio {
+  padding: 15px;
+}
+
+.logoHeader {
+  grid-area: logoHeader;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.menuHeader {
+  grid-area: menuHeader;
+  justify-content: space-around;
+  align-items: center;
+  padding-right: 0px;
+  flex-wrap: wrap;
+}
+
+.logoHeaderStyle {
+  width: 40px;
+  margin-left: 10px;
+  display: flex;
+  align-content: center;
+}
+
+.bg-dark {
+  background-color: rgb(38, 37, 37);
+}
+
+/* Footer General */
+.gridFooter {
+  background-color: rgb(38, 37, 37);
+  padding: 15px;
+  display: grid;
+  grid-template-areas: "direccion logos";
+  grid-template-columns: auto auto;
+}
+
+.logoIg {
+  height: 22px;
+}
+
+.logoYt {
+  height: 24px;
+}
+
+.footerDireccion {
+  grid-area: direccion;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+}
+
+h6 {
+  font-size: 90%;
+}
+
+a {
+  color: rgb(252, 252, 252);
+  text-decoration: none;
+}
+
+.footerLogos {
+  grid-area: logos;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+}
+
+/* Body General */
+body {
+  text-align: center;
+}
+
+/* Mixins */ /* Página Index */
+.gridBodyInicio {
+  display: grid;
+  grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+}
+
+.tituloWeb {
+  grid-area: tituloWeb;
+}
+
+.barraMenu {
+  grid-area: barraMenu;
+}
+
+.contenidoBody {
+  grid-area: contenidoBody;
+  display: flex;
+  justify-content: center;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+}
+
+.logo {
+  padding: 40px;
+  height: 300px;
+  margin-top: 90%;
+  margin-bottom: 90%;
+}
+
+.barraFooter {
+  grid-area: barraFooter;
+}
+
+/* Página Agenda */
+.gridBodyAgenda {
+  display: grid;
+  grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+}
+
+.contenidoBodyAgenda {
+  grid-area: contenidoBodyAgenda;
+  padding-bottom: 1rem;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+}
+
+.tituloAgenda {
+  padding: 50px;
+}
+
+.imgAgenda {
+  height: 300px;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+}
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: rgb(38, 37, 37);
+}
+
+.text {
+  color: rgb(252, 252, 252);
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.gridAgenda {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+/* Página Nosotres */
+.gridBodyNosotres {
+  display: grid;
+  grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+}
+
+.contenidoBodyNosotres {
+  grid-area: contenidoBodyNosotres;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+}
+
+.gridNosotres {
+  display: grid;
+  grid-template-rows: 8% auto auto;
+  grid-template-areas: "titulo" "texto" "imagen";
+  grid-gap: 5px;
+  justify-items: center;
+}
+
+.cajatituloNosotres {
+  grid-area: titulo;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.textoDescripcion {
+  grid-area: texto;
+  justify-content: center;
+  height: auto;
+  max-width: 600px;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  margin: 1rem;
+}
+
+.imagenNosotres {
+  grid-area: imagen;
+  justify-items: center;
+  height: auto;
+  width: 100%;
+  padding: 40px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Página Galería */
+.gridBodyGaleria {
+  display: grid;
+  grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+}
+
+.contenidoBodyGaleria {
+  grid-area: contenidoBodyGaleria;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+  padding: 3.5%;
+}
+
+.fotosGaleria {
+  height: 270px;
+  animation-name: galeria;
+}
+.fotosGaleria:hover {
+  opacity: 0.5;
+}
+
+.tituloGaleria {
+  padding: 10px;
+}
+
+.grid-layout {
+  padding: 20px;
+  padding-bottom: 40px;
+  display: grid;
+  grid-template-areas: "auto auto";
+  grid-template-columns: 50% 50%;
+}
+
+.caja {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+/* Página Contacto */
+.gridBodyContacto {
+  display: grid;
+  grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+}
+
+.fondoGaleria {
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/652/confectionary.png);
+  padding: 5%;
+}
+
+.contenidoBodyContacto {
+  grid-area: contenidoBodyContacto;
+}
+
+.espacioFotoContacto {
+  display: flex;
+  justify-content: center;
+}
+
+.fotoContacto {
+  padding: 2rem;
+  width: 100%;
+}
+
+.formularioContacto {
+  padding: 28px;
+}
+
+.formu {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Media Queries */
+@media screen and (max-width: 460px) {
+  /* Título */
+  h1 {
+    display: none;
+  }
+  /* Página Index */
+  .gridBodyInicio {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+  .barraMenu {
+    grid-area: barraMenu;
+  }
+  .gridHeader {
+    background-color: rgb(38, 37, 37);
+    display: grid;
+    grid-template-areas: "logoHeader menuHeader";
+    grid-template-columns: 25% 75%;
+  }
+  .menuHeader {
+    grid-area: menuHeader;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding-right: 20px;
+    flex-wrap: wrap;
+  }
+  .contenidoBody {
+    grid-area: contenidoBody;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 150px;
+    padding-top: 150px;
+  }
+  .logo {
+    padding: 0px;
+    margin: 70px;
+    height: 120px;
+  }
+  .barraFooter {
+    grid-area: barraFooter;
+  }
+  .gridBodyAgenda {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+  .gridAgenda {
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .imgAgenda {
+    height: 200px;
+  }
+  .contenidoBodyAgenda {
+    grid-area: contenidoBodyAgenda;
+    padding-top: 20px;
+  }
+  /* Página Galeria */
+  .gridBodyGaleria {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+  .grid-layout {
+    padding-bottom: 40px;
+    display: grid;
+    grid-template-areas: "auto";
+    grid-template-columns: 100%;
+  }
+  .contenidoBodyGaleria {
+    padding-top: 50px;
+  }
+  .fotosGaleria {
+    height: 150px;
+  }
+  /* Página Nosotres */
+  .gridBodyNosotres {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+  .gridNosotres {
+    display: grid;
+    grid-template-rows: 8% auto auto;
+    grid-template-areas: "titulo" "texto" "imagen";
+    grid-template-columns: 100%;
+    grid-gap: 0px;
+    justify-items: center;
+    padding-top: 2rem;
+    padding-bottom: 40px;
+  }
+  .textoDescripcion {
+    grid-area: texto;
+    height: auto;
+    width: 100%;
+    padding: 30px;
+  }
+  .imagenNosotres {
+    grid-area: imagen;
+    justify-items: center;
+    width: 100%;
+  }
+  /* Página Contacto */
+  .gridBodyContacto {
+    display: grid;
+    grid-template-areas: "tituloWeb" "barraMenu" "$body" "barraFooter";
+    grid-template-rows: auto auto auto auto;
+    grid-template-columns: auto;
+  }
+  .fotoContacto {
+    padding: 2rem;
+    width: 100%;
+  }
+  .tituloGaleria {
+    padding-top: 3rem;
+  }
+  .formularioContacto {
+    margin: 10px;
+    padding: 18px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+  }
+  .formu {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

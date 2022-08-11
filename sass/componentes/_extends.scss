@@ -1,0 +1,25 @@
+/* Extend Flex */
+
+.displayFlex {
+    display: flex;
+    flex-direction: row;
+}
+
+.flexCentrado {
+    display: flex;
+    align-items: center;
+}
+
+.animacionIn {
+    animation-name: animacionIn;
+    animation-duration: 3s;
+}
+@keyframes animacionIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 2;
+    }
+}
+
