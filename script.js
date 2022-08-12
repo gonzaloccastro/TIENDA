@@ -1,12 +1,17 @@
-// ARTICULO
+/*
+* DEFINICIÓN DE CLASES
+*/
+
+
 class articulo{
-    constructor(nombre, categoria, autor, precio, disponibilidad, stock, codigo){
+    constructor(nombre, categoria, autor, precio, disponibilidad, stock, imagen, codigo){
         this.nombre=nombre
         this.categoria=categoria
         this.autor=autor
         this.precio=precio
         this.disponibilidad=disponibilidad
         this.stock=stock
+        this.imagen=imagen
         this.codigo=codigo
     };
     habilitar(){
@@ -25,42 +30,161 @@ class articulo{
             console.log(error)
         }
     };
-}
+};
 
-// ARRAY TIENDA
+class ElementosCarrito {
+    constructor(producto, cantidad) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+    };
+};
+
+
+/**
+ * DEFINICIÓN DE ARRAYS
+ */
+
 const tienda = [];
+const elementosCarrito = [];
+const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
+const rowContenedorProductos = contenedorProductos [0];
+const contenedorCarritoCompras = document.querySelector("#items");
 
-// ARICULOS
-let articulo1 = new articulo("Remera con Logo", "ROPA", "ARBOL", 2500, true, 10, 6687421);
-let articulo2 = new articulo("Gorra con Logo", "ROPA", "ARBOL", 2000, true, 5, 6687451);
-let articulo3 = new articulo("Taza con Logo", "ITEMS", "ARBOL", 1000, true, 3, 6682421);
-let articulo4 = new articulo("Buzo con Logo", "ROPA", "ARBOL", 2000, true, 8, 6687428);
-let articulo5 = new articulo("Totebag con Logo", "ITEMS", "ARBOL", 3000, true, 12, 6687429);
 
-// PUSH DE ITEMS
-tienda.push(articulo1, articulo2, articulo3, articulo4, articulo5);
-console.table(tienda);
+/**
+ * EJECUSIÓN DE FUNCIONES
+ */
 
-// FILTRO POR DISPONIBILIDAD
+ cargarProductos();
+ cargarCarrito();
+ dibujarCatalogoProductos();
+ dibujarCarrito();
+ 
 
+/**
+ * DEFINICIÓN DE FUNCIONES
+ */
+
+function cargarProductos(){
+    tienda.push(new articulo('Remera con Logo', 'ROPA', 'ARBOL', 2500, true, 10, '/media/tienda/remera.jpg', 1));
+    tienda.push(new articulo('Gorra con Logo', 'ROPA', 'ARBOL', 2000, true, 5, '/media/tienda/gorra.jpg', 2));
+    tienda.push(new articulo('Taza con Logo', 'ITEMS', 'ARBOL', 1000, true, 3, '/media/tienda/taza.jpg', 3));
+    tienda.push(new articulo('Buzo con Logo', 'ROPA', 'ARBOL', 2000, true, 8, '/media/tienda/buzo.jpg', 4));
+    tienda.push(new articulo('Cuaderno con Logo', 'ITEMS', 'ARBOL', 1000, true, 12, '/media/tienda/cuaderno.jpg', 5));
+    tienda.push(new articulo('Totebag con Logo', 'ITEMS', 'ARBOL', 3000, true, 12, '/media/tienda/totebag.jpg', 5));
+    
+};
+
+function cargarCarrito() {
+    let elementoCarrito = new ElementosCarrito(
+        new articulo("'Remera con Logo', 'ROPA', 'ARBOL', 2500, true, 10, '/media/galeria/DSC07874.jpg', 1"),1
+    );
+    elementosCarrito.push(elementoCarrito);
+};
+
+function dibujarCarrito () {
+    let renglonesCarrito = '';
+
+    elementosCarrito.forEach(
+        (elemento) => {
+            renglonesCarrito+=`
+                <tr>
+                    <td>${elemento.producto.codigo}</td>
+                    <td>${elemento.producto.nombre}</td>
+                    <td>${elemento.cantidad}</td>
+                    <td>$ ${elemento.producto.precio}</td>
+                </tr>
+            `;
+        }
+    );
+    contenedorCarritoCompras.innerHTML = renglonesCarrito;
+};
+
+function crearCard(producto) {
+    //BOTON
+    let botonAgregar = document.createElement("button");
+    botonAgregar.className = "btn btn-success";
+    botonAgregar.innerText = "Agregar";
+
+    //CARD BODY
+    let cuerpoCarta = document.createElement("div");
+    cuerpoCarta.className = "card-body";
+    cuerpoCarta.innerHTML = `
+        <h5>${producto.nombre}</h5>
+        <p>$ ${producto.precio}</p>
+    `;
+    cuerpoCarta.append(botonAgregar);
+
+    //IMAGEN
+    let imagen = document.createElement("img");
+    imagen.src = producto.imagen;
+    imagen.className = "card-img-top";
+    imagen.alt = producto.nombre;
+
+    //CARD
+    let carta = document.createElement("div");
+    carta.className = "card";
+    carta.append(imagen);
+    carta.append(cuerpoCarta);
+
+    //CONTENEDOR CARD
+    let contenedorCarta = document.createElement("div");
+    contenedorCarta.className = "col-xs-6 col-sm-4 col-md-4";
+    contenedorCarta.append(carta);
+
+    //BOTON CON EVENTO
+    botonAgregar.onclick = () => {
+        alert("Hiciste click en el producto " + producto.nombre);
+        let elementoCarrito = new ElementosCarrito(producto, 1);
+        elementosCarrito.push(elementoCarrito);
+
+        dibujarCarrito();
+
+    };
+    return contenedorCarta;
+};
+
+function dibujarCatalogoProductos() {
+    rowContenedorProductos.innerHTML = "";
+
+    tienda.forEach(
+        (articulo) => {
+            let contenedorCarta = crearCard(articulo);
+            rowContenedorProductos.append(contenedorCarta);
+        }
+    );
+
+};
+
+
+
+
+/**
+ * FILTRO POR DISPONIBILIDAD
 const disponibles = tienda.filter(articulo=>articulo.disponibilidad == true);
 console.table(disponibles);
+ */
 
-// FILTRO POR CATEGORIA ROPA
+
+/**
+ * FILTRO POR CATEGORIA ROPA
 const categoriaRopa=tienda.filter(articulo=>articulo.categoria=="ROPA");
 console.table(categoriaRopa);
+ */
 
+
+/**
 // FIND PARA ENCONTRAR POR EL CODIGO UNICO
-
 let preguntaBuscar = confirm("Querés buscar un artículo por código?");
 let codigoBuscado=parseInt(prompt("Ingresa el código del artículo a buscar"));
 const porCodigo=tienda.find(art=>art.codigo===codigoBuscado);
 if(porCodigo==undefined){alert("Artículo no encontrado!");
     }else{console.table(porCodigo)};
+ */
 
 
-// FUNCION AGREGAR ARTICULO NUEVO
-
+/**
+ * FUNCION AGREGAR ARTICULO NUEVO
 function agregarArticulo(){
     let nombreArticuloNuevo=prompt("Ingrese el nuevo artículo:");
     let categoriaArticuloNuevo=prompt("Ingrese la categoría articulo:").toUpperCase();
@@ -74,23 +198,21 @@ function agregarArticulo(){
     tienda.push(articuloNuevo);
     console.table(tienda);
     };
-    
-    let preguntaAgregar = confirm("Querés agregar un artículo?");
-    let cantArticulosAgregar = parseInt(prompt("Cuantos artículos queres agregar?"));
-    for (let i=1;i<=cantArticulosAgregar;i++){
+   let preguntaAgregar = confirm("Querés agregar un artículo?");
+   let cantArticulosAgregar = parseInt(prompt("Cuantos artículos queres agregar?"));
+   for (let i=1;i<=cantArticulosAgregar;i++){
         agregarArticulo();
-    };
+};
+*/ 
 
-// TABLA DE STOCK
 
- const listaStock=tienda.map((articulo)=>{
+/**
+ * TABLA DE STOCK
+const listaStock=tienda.map((articulo)=>{
      return{
          nombre: articulo.nombre,
          stock: articulo.stock
      }
- });
- console.table(listaStock);
-
-
-
-
+});
+console.table(listaStock);
+ */

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+        <!-- Requiered meta tags -->
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/style.css">
+
+        <!-- SEO -->
+        <meta name="keywords" content="cultura, indie, musica, arte, disidencias, libros, comida, bar, cerveza, papas fritas, juegos, metegol">
+        <meta name="description" content="Te mostramos algunos de los momentos mágicos que suceden en nuestro espacio cultural.">
+
+        <!-- Título y Favicon -->
+        <title>La Casa del Árbol - Tienda</title>
+        <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    
+    </head>
+
+    <body>
+        <div class="gridBodyInicio">
+            <!-- Header -->
+            <header>
+                <div>
+                    <div class="tituloWeb">
+                        <h1>La Casa del Árbol - Tienda</h1>
+                    </div>
+
+                    <!-- Nav con Bootstrap -->
+                    <div class="barraMenu">
+                        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(38, 37, 37);">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="../index.html">
+                                    <img src="../media/index/logo-header.png" alt="logo-header" class="logoHeaderStyle"></a>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page"  href="../index.html">Inicio</a>
+                                        </li> -->
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="tienda.html">Tienda</a>
+                                        </li>
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="galeria.html">Galería</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="nosotres.html">Nosotres</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="contacto.html">Contacto</a>
+                                        </li> -->
+                                    </ul>
+
+                                    <!-- <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                                    <button class="btn btn-light" type="submit">Buscar
+                                    </button> 
+                                    </form>-->
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">🛒Carrito</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                        <th scope="col">Código</th>
+                                                        <th scope="col">Nombre</th>
+                                                        <th scope="col">Cantidad</th>
+                                                        <th scope="col">Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="items"></tbody>
+                                                    <tfoot>
+                                                        <tr id="footer">
+                                                        <th scope="row" colspan="5">Carrito vacío!</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    </table>
+                                                <div class="row" id="cards"></div>
+                                            </div>
+                                        
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-dark">Terminar compra</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                      
+                </div>
+            </header>
+        </div>
+        
+
+
+        <!-- Section -->
+        <section>
+            <div class="row">
+                <div class="col">
+                    <div class="contenidoBodyGaleria">
+                        <div><h3 class="tituloGaleria">Tienda del Árbol</h3></div>
+                        <div><p>Podes comprar cualquiera de nuestros productos:</p></div>
+                        <div id="contenedor-productos" class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                    <div class="card">
+                                        <img src="/media/galeria/DSC07874.jpg" class="card-img-top" alt="Brownie">
+                                        <div class="card-body">
+                                            <h5>Remera con Logo</h5>
+                                            <p>$123</p>
+                                            <button class="btn btn-success">Comprar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col">
+                    <div class="barraFooter">
+                        <div class="gridFooter">
+
+                        <!-- Logos y Dirección -->
+                            <div class="footerDireccion">
+                                <a target="_blank" href="https://g.page/lacasadelarbolcc?share">
+                                    <h8>Dirección - Av Córdoba 5217</h8>
+                                </a>
+                            </div>
+                            <div class="footerLogos">
+                                <div>
+                                    <div class="footerInstagram">
+                                        <a target="_blank" href="https://www.instagram.com/_lacasadelarbol_/"><img src="../media/index/ig-logo.png" alt="foto" class="logoIg"></a>
+                                    </div>
+                                    <div class="footerYoutube">
+                                        <a target="_blank" href="https://www.youtube.com/channel/UCHJCUR9qUKdXYBjcB2bl7Xg"><img src="../media/index/yt-logo.png" alt="foto" class="logoYt"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bootrstap JS -->
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+                        <script src="../script.js"></script>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </body>
+</html>
