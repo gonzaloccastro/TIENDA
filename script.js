@@ -1,7 +1,12 @@
 /*
-* DEFINICIÓN DE CLASES
+* CONSTANTES
 */
 
+const estandarDolaresAmericanos = Intl.NumberFormat('en-US');
+
+/*
+* DEFINICIÓN DE CLASES
+*/
 
 class articulo{
     constructor(nombre, categoria, autor, precio, disponibilidad, stock, imagen, codigo){
@@ -39,7 +44,6 @@ class ElementosCarrito {
     };
 };
 
-
 /**
  * DEFINICIÓN DE ARRAYS
  */
@@ -49,14 +53,13 @@ const elementosCarrito = [];
 const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
 const rowContenedorProductos = contenedorProductos [0];
 const contenedorCarritoCompras = document.querySelector("#items");
-
+const contenedorFooterCarrito = document.querySelector("#footer");
 
 /**
  * EJECUSIÓN DE FUNCIONES
  */
 
  cargarProductos();
- cargarCarrito();
  dibujarCatalogoProductos();
  dibujarCarrito();
  
@@ -75,29 +78,65 @@ function cargarProductos(){
     
 };
 
-function cargarCarrito() {
-    let elementoCarrito = new ElementosCarrito(
-        new articulo("'Remera con Logo', 'ROPA', 'ARBOL', 2500, true, 10, '/media/galeria/DSC07874.jpg', 1"),1
+function removerProductoCarrito(elementoAEliminar) {
+    const elementosAMantener = elementosCarrito.filter(
+        (elemento) => elemento.producto.codigo != elementoAEliminar.producto.codigo
     );
-    elementosCarrito.push(elementoCarrito);
+
+    elementosCarrito.length = 0;
+    elementosAMantener.forEach((elemento) => elementosCarrito.push(elemento));
 };
 
 function dibujarCarrito () {
-    let renglonesCarrito = '';
+    contenedorCarritoCompras.innerHTML = "";
+
+    let sumaCarrito = 0;
 
     elementosCarrito.forEach(
         (elemento) => {
-            renglonesCarrito+=`
-                <tr>
+            let renglonesCarrito = document.createElement("tr");
+
+            renglonesCarrito.innerHTML = `
                     <td>${elemento.producto.codigo}</td>
                     <td>${elemento.producto.nombre}</td>
-                    <td>${elemento.cantidad}</td>
-                    <td>$ ${elemento.producto.precio}</td>
-                </tr>
-            `;
+                    <td><input id="cantidad-producto-${elemento.producto.codigo}" type="number" value="${elemento.cantidad}" min="1" max="1000" step="1" style="width: 50px;"/></td>
+                    <td>$ ${estandarDolaresAmericanos.format(elemento.producto.precio)}</td>
+                    <td>$ ${estandarDolaresAmericanos.format(elemento.producto.precio*elemento.cantidad)}</td>
+                    <td><button id="eliminar-producto-${elemento.producto.codigo}" type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></td>
+                `;
+
+            contenedorCarritoCompras.append(renglonesCarrito);
+
+            sumaCarrito+=elemento.producto.precio*elemento.cantidad;
+
+            let inputCantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.codigo}`);
+
+            inputCantidadProductos.addEventListener("change", (e) => {
+               let nuevaCantidad = e.target.value;
+               elemento.cantidad = nuevaCantidad;
+
+               dibujarCarrito();
+            });
+
+            let botonBorrarProducto = document.getElementById(`eliminar-producto-${elemento.producto.codigo}`);
+
+            botonBorrarProducto.addEventListener('click', () => {
+                removerProductoCarrito(elemento);
+
+                dibujarCarrito();
+            });
         }
     );
-    contenedorCarritoCompras.innerHTML = renglonesCarrito;
+
+    if(elementosCarrito.length == 0) {
+        contenedorFooterCarrito.innerHTML = `
+        <th scope="row" colspan="5"> Carrito vacío!</th>
+        `;
+    } else {
+        contenedorFooterCarrito.innerHTML = `
+        <th scope="row" colspan="5"> Total de la compra: $${estandarDolaresAmericanos.format(sumaCarrito)}</th>
+        `;
+    };
 };
 
 function crearCard(producto) {
@@ -111,7 +150,7 @@ function crearCard(producto) {
     cuerpoCarta.className = "card-body";
     cuerpoCarta.innerHTML = `
         <h5>${producto.nombre}</h5>
-        <p>$ ${producto.precio}</p>
+        <p>$ ${estandarDolaresAmericanos.format(producto.precio)}</p>
     `;
     cuerpoCarta.append(botonAgregar);
 
@@ -124,6 +163,7 @@ function crearCard(producto) {
     //CARD
     let carta = document.createElement("div");
     carta.className = "card";
+    carta.style = "width: 25rem";
     carta.append(imagen);
     carta.append(cuerpoCarta);
 
@@ -134,12 +174,16 @@ function crearCard(producto) {
 
     //BOTON CON EVENTO
     botonAgregar.onclick = () => {
-        alert("Hiciste click en el producto " + producto.nombre);
-        let elementoCarrito = new ElementosCarrito(producto, 1);
-        elementosCarrito.push(elementoCarrito);
+        alert("Agregaste el producto: \n" + producto.nombre);
 
+        let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
+
+        if(elementoExistente) {elementoExistente.cantidad+=1
+        } else {
+            let elementoCarrito = new ElementosCarrito(producto, 1);
+            elementosCarrito.push(elementoCarrito);
+        }
         dibujarCarrito();
-
     };
     return contenedorCarta;
 };
@@ -204,7 +248,6 @@ function agregarArticulo(){
         agregarArticulo();
 };
 */ 
-
 
 /**
  * TABLA DE STOCK
