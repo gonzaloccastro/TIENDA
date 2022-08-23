@@ -49,7 +49,7 @@ class ElementosCarrito {
  */
 
 const tienda = [];
-const elementosCarrito = [];
+let elementosCarrito = [];
 const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
 const rowContenedorProductos = contenedorProductos [0];
 const contenedorCarritoCompras = document.querySelector("#items");
@@ -62,6 +62,8 @@ const contenedorFooterCarrito = document.querySelector("#footer");
  cargarProductos();
  dibujarCatalogoProductos();
  dibujarCarrito();
+ guardarALocalStorage();
+ recuperarDeLocalStorage();
  
 
 /**
@@ -87,10 +89,21 @@ function removerProductoCarrito(elementoAEliminar) {
     elementosAMantener.forEach((elemento) => elementosCarrito.push(elemento));
 };
 
+function guardarALocalStorage(){
+    localStorage.setItem("elementosCarrito", JSON.stringify(elementosCarrito));
+};
+
+function recuperarDeLocalStorage(){
+    if (localStorage.getItem("elementosCarrito")!=null){
+        carrito=JSON.parse(localStorage.getItem("elementosCarrito"))
+    };
+};
+
+
 function dibujarCarrito () {
     contenedorCarritoCompras.innerHTML = "";
-
-    let sumaCarrito = 0;
+    recuperarDeLocalStorage();
+    let sumaCarrito = 0 ;
 
     elementosCarrito.forEach(
         (elemento) => {
@@ -122,7 +135,7 @@ function dibujarCarrito () {
 
             botonBorrarProducto.addEventListener('click', () => {
                 removerProductoCarrito(elemento);
-
+                guardarALocalStorage();
                 dibujarCarrito();
             });
         }
@@ -137,6 +150,7 @@ function dibujarCarrito () {
         <th scope="row" colspan="5"> Total de la compra: $${estandarDolaresAmericanos.format(sumaCarrito)}</th>
         `;
     };
+    console.log(elementosCarrito);
 };
 
 function crearCard(producto) {
@@ -183,6 +197,7 @@ function crearCard(producto) {
             let elementoCarrito = new ElementosCarrito(producto, 1);
             elementosCarrito.push(elementoCarrito);
         }
+        guardarALocalStorage();
         dibujarCarrito();
     };
     return contenedorCarta;
@@ -199,8 +214,6 @@ function dibujarCatalogoProductos() {
     );
 
 };
-
-
 
 
 /**
