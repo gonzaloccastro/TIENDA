@@ -48,8 +48,7 @@ class ElementosCarrito {
  * DEFINICIÓN DE ARRAYS
  */
 
-const tienda = [];
-let elementosCarrito = [];
+let elementosCarrito = JSON.parse(localStorage.getItem("elementosCarrito")) || [];
 const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
 const rowContenedorProductos = contenedorProductos [0];
 const contenedorCarritoCompras = document.querySelector("#items");
@@ -59,26 +58,13 @@ const contenedorFooterCarrito = document.querySelector("#footer");
  * EJECUSIÓN DE FUNCIONES
  */
 
- cargarProductos();
  dibujarCatalogoProductos();
  dibujarCarrito();
- guardarALocalStorage();
- recuperarDeLocalStorage();
  
 
 /**
  * DEFINICIÓN DE FUNCIONES
  */
-
-function cargarProductos(){
-    tienda.push(new articulo('Remera con Logo', 'ROPA', 'ARBOL', 2500, true, 10, '/media/tienda/remera.jpg', 1));
-    tienda.push(new articulo('Gorra con Logo', 'ROPA', 'ARBOL', 2000, true, 5, '/media/tienda/gorra.jpg', 2));
-    tienda.push(new articulo('Taza con Logo', 'ITEMS', 'ARBOL', 1000, true, 3, '/media/tienda/taza.jpg', 3));
-    tienda.push(new articulo('Buzo con Logo', 'ROPA', 'ARBOL', 2000, true, 8, '/media/tienda/buzo.jpg', 4));
-    tienda.push(new articulo('Cuaderno con Logo', 'ITEMS', 'ARBOL', 1000, true, 12, '/media/tienda/cuaderno.jpg', 5));
-    tienda.push(new articulo('Totebag con Logo', 'ITEMS', 'ARBOL', 3000, true, 12, '/media/tienda/totebag.jpg', 5));
-    
-};
 
 function removerProductoCarrito(elementoAEliminar) {
     const elementosAMantener = elementosCarrito.filter(
@@ -93,16 +79,8 @@ function guardarALocalStorage(){
     localStorage.setItem("elementosCarrito", JSON.stringify(elementosCarrito));
 };
 
-function recuperarDeLocalStorage(){
-    if (localStorage.getItem("elementosCarrito")!=null){
-        carrito=JSON.parse(localStorage.getItem("elementosCarrito"))
-    };
-};
-
-
 function dibujarCarrito () {
     contenedorCarritoCompras.innerHTML = "";
-    recuperarDeLocalStorage();
     let sumaCarrito = 0 ;
 
     elementosCarrito.forEach(
@@ -206,9 +184,9 @@ function crearCard(producto) {
 function dibujarCatalogoProductos() {
     rowContenedorProductos.innerHTML = "";
 
-    tienda.forEach(
-        (articulo) => {
-            let contenedorCarta = crearCard(articulo);
+    productos.forEach(
+        (producto) => {
+            let contenedorCarta = crearCard(producto);
             rowContenedorProductos.append(contenedorCarta);
         }
     );

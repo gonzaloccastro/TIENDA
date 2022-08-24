@@ -1,4 +1,4 @@
-const productos = [{
+let productos = [{
         nombre:'Remera con Logo',
         categoria:'ROPA',
         autor:'ARBOL',
