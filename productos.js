@@ -5,7 +5,7 @@ let productos = [{
         precio: 2500,
         disponibilidad: true,
         stock: 10,
-        imagen:'/media/tienda/remera.jpg',
+        imagen:"/media/tienda/remera.jpg",
         codigo: 1
     },
     {

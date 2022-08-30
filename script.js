@@ -19,22 +19,6 @@ class articulo{
         this.imagen=imagen
         this.codigo=codigo
     };
-    habilitar(){
-        let error="artículo disponible"
-        if(this.disponibilidad==false){
-            this.disponibilidad=true
-        }else{
-            console.log(error)
-        }
-    };
-    deshabilitar(){
-        let error="artículo no disponible"
-        if(this.disponibilidad==true){
-            this.disponibilidad=false
-        }else{
-            console.log(error)
-        }
-    };
 };
 
 class ElementosCarrito {
@@ -66,6 +50,8 @@ const contenedorFooterCarrito = document.querySelector("#footer");
  * DEFINICIÓN DE FUNCIONES
  */
 
+// FUNCIÓN REMOVER PRODUCTO DEL CARRITO
+
 function removerProductoCarrito(elementoAEliminar) {
     const elementosAMantener = elementosCarrito.filter(
         (elemento) => elemento.producto.codigo != elementoAEliminar.producto.codigo
@@ -75,9 +61,13 @@ function removerProductoCarrito(elementoAEliminar) {
     elementosAMantener.forEach((elemento) => elementosCarrito.push(elemento));
 };
 
+// FUNCIÓN GUARDAR AL LOCAL STORAGE
+
 function guardarALocalStorage(){
     localStorage.setItem("elementosCarrito", JSON.stringify(elementosCarrito));
 };
+
+// FUNCIÓN DIBUJAR CARRITO
 
 function dibujarCarrito () {
     contenedorCarritoCompras.innerHTML = "";
@@ -131,10 +121,12 @@ function dibujarCarrito () {
     console.log(elementosCarrito);
 };
 
+// FUNCIÓN DIBUJAR CARTA DE PRODUCTOS
+
 function crearCard(producto) {
     //BOTON
     let botonAgregar = document.createElement("button");
-    botonAgregar.className = "btn btn-success";
+    botonAgregar.className = "btn btn-secondary";
     botonAgregar.innerText = "Agregar";
 
     //CARD BODY
@@ -155,7 +147,7 @@ function crearCard(producto) {
     //CARD
     let carta = document.createElement("div");
     carta.className = "card";
-    carta.style = "width: 25rem";
+    carta.style = "align-item: center";
     carta.append(imagen);
     carta.append(cuerpoCarta);
 
@@ -166,7 +158,11 @@ function crearCard(producto) {
 
     //BOTON CON EVENTO
     botonAgregar.onclick = () => {
-        alert("Agregaste el producto: \n" + producto.nombre);
+        Swal.fire(
+            'Sumado!',
+            ('Agregaste el producto: \n' + producto.nombre),
+            'success'
+        );
 
         let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
 
@@ -181,6 +177,8 @@ function crearCard(producto) {
     return contenedorCarta;
 };
 
+// FUNCIÓN DIBUJAR LA TIENDA
+
 function dibujarCatalogoProductos() {
     rowContenedorProductos.innerHTML = "";
 
@@ -190,63 +188,4 @@ function dibujarCatalogoProductos() {
             rowContenedorProductos.append(contenedorCarta);
         }
     );
-
 };
-
-
-/**
- * FILTRO POR DISPONIBILIDAD
-const disponibles = tienda.filter(articulo=>articulo.disponibilidad == true);
-console.table(disponibles);
- */
-
-
-/**
- * FILTRO POR CATEGORIA ROPA
-const categoriaRopa=tienda.filter(articulo=>articulo.categoria=="ROPA");
-console.table(categoriaRopa);
- */
-
-
-/**
-// FIND PARA ENCONTRAR POR EL CODIGO UNICO
-let preguntaBuscar = confirm("Querés buscar un artículo por código?");
-let codigoBuscado=parseInt(prompt("Ingresa el código del artículo a buscar"));
-const porCodigo=tienda.find(art=>art.codigo===codigoBuscado);
-if(porCodigo==undefined){alert("Artículo no encontrado!");
-    }else{console.table(porCodigo)};
- */
-
-
-/**
- * FUNCION AGREGAR ARTICULO NUEVO
-function agregarArticulo(){
-    let nombreArticuloNuevo=prompt("Ingrese el nuevo artículo:");
-    let categoriaArticuloNuevo=prompt("Ingrese la categoría articulo:").toUpperCase();
-    let autorArticuloNuevo=prompt("Ingrese de quien es el articulo:").toUpperCase();
-    let precioArticuloNuevo=Number(prompt("Ingrese el precio del articulo:"));
-    let disponibilidadArticuloNuevo=confirm("Ingrese si está disponible articulo:");
-    let stockArticuloNuevo=Number(prompt("Ingrese el stock del articulo:"));
-    let codigoArticuloNuevo=Number(prompt("Ingrese el código del articulo:"));
-    let articuloNuevo=new articulo(nombreArticuloNuevo,categoriaArticuloNuevo,autorArticuloNuevo,precioArticuloNuevo, disponibilidadArticuloNuevo, stockArticuloNuevo, codigoArticuloNuevo);
-    console.table(articuloNuevo);
-    tienda.push(articuloNuevo);
-    console.table(tienda);
-    };
-   let preguntaAgregar = confirm("Querés agregar un artículo?");
-   let cantArticulosAgregar = parseInt(prompt("Cuantos artículos queres agregar?"));
-   for (let i=1;i<=cantArticulosAgregar;i++){
-        agregarArticulo();
-};
-*/ 
-
-/**
- * TABLA DE STOCK
-const listaStock=tienda.map((articulo)=>{
-     return{
-         nombre: articulo.nombre,
-         stock: articulo.stock
-     }
-});
-console.table(listaStock);
- */
