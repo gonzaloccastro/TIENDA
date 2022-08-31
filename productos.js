@@ -1,4 +1,5 @@
-let productos = [{
+const prod1 = [
+    {
         nombre:'Remera con Logo',
         categoria:'ROPA',
         autor:'ARBOL',
@@ -27,7 +28,10 @@ let productos = [{
         stock: 3,
         imagen: '../media/tienda/taza.jpg',
         codigo: 3
-    },
+    }
+];
+
+const prod2 = [
     {
         nombre: 'Buzo con Logo',   
         categoria: 'ROPA',
@@ -59,3 +63,6 @@ let productos = [{
         codigo:5
     }
 ];
+
+// SPREAD
+const productos = [...prod1, ...prod2];

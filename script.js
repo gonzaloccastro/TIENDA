@@ -44,11 +44,18 @@ const contenedorFooterCarrito = document.querySelector("#footer");
 
  dibujarCatalogoProductos();
  dibujarCarrito();
- 
+ chequeoEdad();
 
 /**
  * DEFINICIÓN DE FUNCIONES
  */
+
+// Ternario aplicado
+
+function chequeoEdad(){
+    let cartelEdad = confirm("Sos mayor de edad?");
+    cartelEdad ? alert("Perfecto, podes entrar.") : alert("Esta web es sólo para personas de 18 años.");
+};
 
 // FUNCIÓN REMOVER PRODUCTO DEL CARRITO
 
@@ -108,7 +115,7 @@ function dibujarCarrito () {
             });
         }
     );
-
+    
     if(elementosCarrito.length == 0) {
         contenedorFooterCarrito.innerHTML = `
         <th scope="row" colspan="5"> Carrito vacío!</th>
@@ -124,6 +131,10 @@ function dibujarCarrito () {
 // FUNCIÓN DIBUJAR CARTA DE PRODUCTOS
 
 function crearCard(producto) {
+    
+    // Desestructuracion
+    const [{nombre, precio}] = productos;
+
     //BOTON
     let botonAgregar = document.createElement("button");
     botonAgregar.className = "btn btn-secondary";
@@ -133,8 +144,8 @@ function crearCard(producto) {
     let cuerpoCarta = document.createElement("div");
     cuerpoCarta.className = "card-body";
     cuerpoCarta.innerHTML = `
-        <h5>${producto.nombre}</h5>
-        <p>$ ${estandarDolaresAmericanos.format(producto.precio)}</p>
+        <h5>${nombre}</h5>
+        <p>$ ${estandarDolaresAmericanos.format(precio)}</p>
     `;
     cuerpoCarta.append(botonAgregar);
 
@@ -142,7 +153,7 @@ function crearCard(producto) {
     let imagen = document.createElement("img");
     imagen.src = producto.imagen;
     imagen.className = "card-img-top";
-    imagen.alt = producto.nombre;
+    imagen.alt = nombre;
 
     //CARD
     let carta = document.createElement("div");
@@ -160,11 +171,12 @@ function crearCard(producto) {
     botonAgregar.onclick = () => {
         Swal.fire(
             'Sumado!',
-            ('Agregaste el producto: \n' + producto.nombre),
+            ('Agregaste el producto: \n' + nombre),
             'success'
         );
 
         let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
+
 
         if(elementoExistente) {elementoExistente.cantidad+=1
         } else {
