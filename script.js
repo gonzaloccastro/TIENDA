@@ -37,6 +37,7 @@ const contenedorProductos = document.getElementById('contenedor-productos').getE
 const rowContenedorProductos = contenedorProductos [0];
 const contenedorCarritoCompras = document.querySelector("#items");
 const contenedorFooterCarrito = document.querySelector("#footer");
+const botonTerminarCompra = document.querySelector("#botonCompra");
 
 /**
  * EJECUSIÓN DE FUNCIONES
@@ -45,6 +46,7 @@ const contenedorFooterCarrito = document.querySelector("#footer");
  dibujarCatalogoProductos();
  dibujarCarrito();
  chequeoEdad();
+ terminarCompra();
 
 /**
  * DEFINICIÓN DE FUNCIONES
@@ -112,6 +114,13 @@ function dibujarCarrito () {
                 removerProductoCarrito(elemento);
                 guardarALocalStorage();
                 dibujarCarrito();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: `Eliminaste el producto \n\n ${elemento.producto.nombre}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
             });
         }
     );
@@ -127,6 +136,33 @@ function dibujarCarrito () {
     };
     console.log(elementosCarrito);
 };
+
+function terminarCompra (){
+    botonTerminarCompra.addEventListener('click', () => {
+        let timerInterval
+        Swal.fire({
+        title: 'Procesando la compra!',
+        html: 'Cerrando en <b></b> millisegundos.',
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+            }, 100)
+        },
+        willClose: () => {
+            clearInterval(timerInterval)
+        }
+        }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('Me cerré')
+        }
+        })
+    });
+};
+
 
 // FUNCIÓN DIBUJAR CARTA DE PRODUCTOS
 
@@ -170,9 +206,15 @@ function crearCard(producto) {
     //BOTON CON EVENTO
     botonAgregar.onclick = () => {
         Swal.fire(
-            'Sumado!',
-            ('Agregaste el producto: \n' + nombre),
-            'success'
+            ({
+            position: 'center',
+            icon: 'success',
+            title: 'Agregaste el producto: \n\n' + nombre,
+            showConfirmButton: false,
+            timer: 1500
+            })
+
+
         );
 
         let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
