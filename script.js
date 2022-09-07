@@ -30,23 +30,16 @@ class ElementosCarrito {
 
 /**
  * DEFINICIÓN DE ARRAYS
- */
+*/
 
 let elementosCarrito = JSON.parse(localStorage.getItem("elementosCarrito")) || [];
 const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
 const rowContenedorProductos = contenedorProductos [0];
+let productosJSON = [];
 const contenedorCarritoCompras = document.querySelector("#items");
 const contenedorFooterCarrito = document.querySelector("#footer");
 const botonTerminarCompra = document.querySelector("#botonCompra");
-
-/**
- * EJECUSIÓN DE FUNCIONES
- */
-
- dibujarCatalogoProductos();
- dibujarCarrito();
- chequeoEdad();
- terminarCompra();
+let dolarVenta;
 
 /**
  * DEFINICIÓN DE FUNCIONES
@@ -54,10 +47,12 @@ const botonTerminarCompra = document.querySelector("#botonCompra");
 
 // Ternario aplicado
 
+/**
 function chequeoEdad(){
     let cartelEdad = confirm("Sos mayor de edad?");
     cartelEdad ? alert("Perfecto, podes entrar.") : alert("Esta web es sólo para personas de 18 años.");
 };
+ */
 
 // FUNCIÓN REMOVER PRODUCTO DEL CARRITO
 
@@ -163,14 +158,22 @@ function terminarCompra (){
     });
 };
 
+// FUNCIÓN DIBUJAR LA TIENDA
+function dibujarCatalogoProductos() {
+    rowContenedorProductos.innerHTML = "";
+    console.log(productosJSON)
+    productosJSON.forEach(
+        (producto) => {
+            let contenedorCarta = crearCard(producto);
+            rowContenedorProductos.append(contenedorCarta);
+        }
+    );
+};
 
 // FUNCIÓN DIBUJAR CARTA DE PRODUCTOS
 
 function crearCard(producto) {
     
-    // Desestructuracion
-    const [{nombre, precio}] = productos;
-
     //BOTON
     let botonAgregar = document.createElement("button");
     botonAgregar.className = "btn btn-secondary";
@@ -180,8 +183,9 @@ function crearCard(producto) {
     let cuerpoCarta = document.createElement("div");
     cuerpoCarta.className = "card-body";
     cuerpoCarta.innerHTML = `
-        <h5>${nombre}</h5>
-        <p>$ ${estandarDolaresAmericanos.format(precio)}</p>
+        <h5>${producto.nombre}</h5>
+        <p>Precio $ ${estandarDolaresAmericanos.format(producto.precio)}</p>
+        <p>Precio U$ ${(producto.precio/dolarVenta).toFixed(1)}</p>
     `;
     cuerpoCarta.append(botonAgregar);
 
@@ -189,7 +193,7 @@ function crearCard(producto) {
     let imagen = document.createElement("img");
     imagen.src = producto.imagen;
     imagen.className = "card-img-top";
-    imagen.alt = nombre;
+    imagen.alt = producto.nombre;
 
     //CARD
     let carta = document.createElement("div");
@@ -209,12 +213,10 @@ function crearCard(producto) {
             ({
             position: 'center',
             icon: 'success',
-            title: 'Agregaste el producto: \n\n' + nombre,
+            title: 'Agregaste el producto: \n\n' + producto.nombre,
             showConfirmButton: false,
             timer: 1500
             })
-
-
         );
 
         let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
@@ -231,15 +233,29 @@ function crearCard(producto) {
     return contenedorCarta;
 };
 
-// FUNCIÓN DIBUJAR LA TIENDA
 
-function dibujarCatalogoProductos() {
-    rowContenedorProductos.innerHTML = "";
-
-    productos.forEach(
-        (producto) => {
-            let contenedorCarta = crearCard(producto);
-            rowContenedorProductos.append(contenedorCarta);
-        }
-    );
+// FUNCIÓN OBTENER VALOR DOLAR
+async function obtenerValorDolar() {
+    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const resp=await fetch(URLDOLAR)
+    const data=await resp.json()
+    document.getElementById("barraDolar").innerHTML+=(`<p align="center">Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
+    dolarVenta = data.venta;
+    obtenerJSON();
 };
+
+// FUNCIÓN GETJSON de productos.json
+async function obtenerJSON() {
+    const URLJSON="../productos.json"
+    const resp=await fetch(URLJSON)
+    const data= await resp.json()
+    productosJSON = data;
+    dibujarCatalogoProductos();
+};
+
+/**
+ * EJECUSIÓN DE FUNCIONES
+ */
+ obtenerValorDolar();
+ dibujarCarrito();
+ terminarCompra();
