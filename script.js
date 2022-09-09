@@ -134,27 +134,37 @@ function dibujarCarrito () {
 
 function terminarCompra (){
     botonTerminarCompra.addEventListener('click', () => {
-        let timerInterval
-        Swal.fire({
-        title: 'Procesando la compra!',
-        html: 'Cerrando en <b></b> millisegundos.',
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-            Swal.showLoading()
-            const b = Swal.getHtmlContainer().querySelector('b')
-            timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft()
-            }, 100)
-        },
-        willClose: () => {
-            clearInterval(timerInterval)
-        }
-        }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-            console.log('Me cerré')
-        }
-        })
+        if(elementosCarrito.length == 0) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El carrito está vacío, no hay nada que comprar!',
+            });
+            } else {
+            datosFormulario();
+            function datosFormulario(){
+                Swal.fire({
+                    title: 'Conectate con tu usuario',
+                    html: ` <input type="text" id="login" class="swal2-input" placeholder="Usuario">
+                            <input type="password" id="password" class="swal2-input" placeholder="Contraseña">`,
+                    confirmButtonText: 'Conectar',
+                    focusConfirm: false,
+                    preConfirm: () => {
+                      const login = Swal.getPopup().querySelector('#login').value
+                      const password = Swal.getPopup().querySelector('#password').value
+                      if (!login || !password) {
+                        Swal.showValidationMessage(`Por favor ingresa usuario y contraseña`)
+                      }
+                      return { login: login, password: password };
+                    }
+                }).then((result) => {
+                    Swal.fire(`
+                        Usuario: ${result.value.login}
+                        Contraseña: ${result.value.password}
+                    `.trim());
+                });
+            };
+        };
     });
 };
 
