@@ -247,10 +247,10 @@ async function obtenerValorDolar() {
 
 // FUNCIÓN GETJSON de productos.json
 async function obtenerJSON() {
-    const URLJSON="../json/productos.json"
-    const resp=await fetch(URLJSON)
+    const URLJSON = '../json/productos.json'
+    const resp= await fetch(URLJSON, {mode: 'no-cors'})
     const data= await resp.json()
-    productosJSON = data;
+    productosJSON = data
     dibujarCatalogoProductos();
 };
 
