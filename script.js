@@ -45,15 +45,6 @@ let dolarVenta;
  * DEFINICIÓN DE FUNCIONES
  */
 
-// Ternario aplicado
-
-/**
-function chequeoEdad(){
-    let cartelEdad = confirm("Sos mayor de edad?");
-    cartelEdad ? alert("Perfecto, podes entrar.") : alert("Esta web es sólo para personas de 18 años.");
-};
- */
-
 // FUNCIÓN REMOVER PRODUCTO DEL CARRITO
 
 function removerProductoCarrito(elementoAEliminar) {
@@ -256,7 +247,7 @@ async function obtenerValorDolar() {
 
 // FUNCIÓN GETJSON de productos.json
 async function obtenerJSON() {
-    const URLJSON="../productos.json"
+    const URLJSON="/productos.json"
     const resp=await fetch(URLJSON)
     const data= await resp.json()
     productosJSON = data;
