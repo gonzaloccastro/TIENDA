@@ -234,6 +234,14 @@ function crearCard(producto) {
     return contenedorCarta;
 };
 
+// FUNCIÓN GETJSON de productos.json
+async function obtenerJSON() {
+    const URLJSON = '../json/productos.json'
+    const resp= await fetch(URLJSON, {mode: 'no-cors'})
+    const data= await resp.json()
+    productosJSON = data;
+    dibujarCatalogoProductos();
+};
 
 // FUNCIÓN OBTENER VALOR DOLAR
 async function obtenerValorDolar() {
@@ -245,14 +253,6 @@ async function obtenerValorDolar() {
     obtenerJSON();
 };
 
-// FUNCIÓN GETJSON de productos.json
-async function obtenerJSON() {
-    const URLJSON = '../json/productos.json'
-    const resp= await fetch(URLJSON, {mode: 'no-cors'})
-    const data= await resp.json()
-    productosJSON = data
-    dibujarCatalogoProductos();
-};
 
 /**
  * EJECUSIÓN DE FUNCIONES

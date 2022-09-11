@@ -14,7 +14,7 @@
         "categoria":"ROPA",
         "autor":"ARBOL",
         "precio": 2000,
-        "disponibilidad":  true,
+        "disponibilidad": true,
         "stock": 5,
         "imagen": "../media/tienda/gorra.jpg",
         "codigo": 2
