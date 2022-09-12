@@ -150,8 +150,10 @@ function terminarCompra (){
                     }
                 }).then((result) => {
                     Swal.fire(`
+                        Felicitaciones!\n
                         Usuario: ${result.value.login}
-                        Contraseña: ${result.value.password}
+                        \n
+                        Ahora pasemos a los medios de pago.\n
                     `.trim());
                 });
             };
@@ -245,7 +247,7 @@ async function obtenerJSON() {
 
 // FUNCIÓN OBTENER VALOR DOLAR
 async function obtenerValorDolar() {
-    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const URLDOLAR = "https://cors-anywhere.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const resp=await fetch(URLDOLAR)
     const data=await resp.json()
     document.getElementById("barraDolar").innerHTML+=(`<p align="center">Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
