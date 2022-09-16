@@ -33,8 +33,8 @@ class ElementosCarrito {
 */
 
 let elementosCarrito = JSON.parse(localStorage.getItem("elementosCarrito")) || [];
-const contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
-const rowContenedorProductos = contenedorProductos [0];
+let contenedorProductos = document.getElementById('contenedor-productos').getElementsByClassName('row');
+let rowContenedorProductos = contenedorProductos [0];
 let productosJSON = [];
 const contenedorCarritoCompras = document.querySelector("#items");
 const contenedorFooterCarrito = document.querySelector("#footer");
@@ -67,7 +67,6 @@ function guardarALocalStorage(){
 function dibujarCarrito () {
     contenedorCarritoCompras.innerHTML = "";
     let sumaCarrito = 0 ;
-
     elementosCarrito.forEach(
         (elemento) => {
             let renglonesCarrito = document.createElement("tr");
@@ -130,6 +129,7 @@ function terminarCompra (){
                 icon: 'error',
                 title: 'Oops...',
                 text: 'El carrito está vacío, no hay nada que comprar!',
+                
             });
             } else {
             datosFormulario();
@@ -197,6 +197,7 @@ function crearCard(producto) {
     imagen.src = producto.imagen;
     imagen.className = "card-img-top";
     imagen.alt = producto.nombre;
+    
 
     //CARD
     let carta = document.createElement("div");
@@ -204,6 +205,12 @@ function crearCard(producto) {
     carta.style = "align-item: center";
     carta.append(imagen);
     carta.append(cuerpoCarta);
+    carta.addEventListener("mouseover", (event)=>{
+            event.target.style.filter = "grayscale(60%)";
+            setTimeout(() => {
+            event.target.style.filter = "";
+            }, 500);
+          }, false);
 
     //CONTENEDOR CARD
     let contenedorCarta = document.createElement("div");
@@ -224,17 +231,16 @@ function crearCard(producto) {
 
         let elementoExistente = elementosCarrito.find((elemento)=>elemento.producto.codigo == producto.codigo)
 
-
         if(elementoExistente) {elementoExistente.cantidad+=1
         } else {
             let elementoCarrito = new ElementosCarrito(producto, 1);
             elementosCarrito.push(elementoCarrito);
-        }
+        };
         guardarALocalStorage();
         dibujarCarrito();
     };
     return contenedorCarta;
-};
+};    
 
 // FUNCIÓN GETJSON de productos.json
 async function obtenerJSON() {
@@ -247,7 +253,7 @@ async function obtenerJSON() {
 
 // FUNCIÓN OBTENER VALOR DOLAR
 async function obtenerValorDolar() {
-    const URLDOLAR = "https://cors-anywhere.herokuapp.com/https://api-dolar-argentina.herokuapp.com/api/dolarblue";
+    const URLDOLAR = "https://api-dolar-argentina.herokuapp.com/api/dolarblue";
     const resp=await fetch(URLDOLAR)
     const data=await resp.json()
     document.getElementById("barraDolar").innerHTML+=(`<p align="center">Dolar compra: $ ${data.compra}  Dolar venta: $ ${data.venta}</p>`);
